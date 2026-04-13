@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "source": "test@0.0.0",
+  "topic": {
+    "slug": "test-topic",
+    "id": 1,
+    "codeRange": "AN1.1",
+    "subject": "AN"
+  },
+  "competencies": ["AN1.1"],
+  "video": {
+    "url": "https://cdn.cbme.in/videos/test-topic/v1/video.mp4",
+    "duration": 30.0,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "audioCodec": "aac"
+  },
+  "scenes": [
+    {
+      "id": "scene-0",
+      "type": "title",
+      "start": 0.0,
+      "end": 5.0,
+      "narration": "Welcome to the test topic.",
+      "narrationWords": [],
+      "visuals": { "kind": "title-card", "text": "Test Topic" }
+    }
+  ]
+}

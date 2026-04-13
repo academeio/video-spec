@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "source": "test@0.0.0",
+  "topic": {
+    "slug": "axilla",
+    "id": 42,
+    "codeRange": "AN10.1-13",
+    "subject": "AN"
+  },
+  "competencies": ["AN10.1", "AN10.4"],
+  "video": {
+    "url": "https://cdn.cbme.in/videos/axilla/v1/video.mp4",
+    "duration": 60.0,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "audioCodec": "aac"
+  },
+  "scenes": [
+    {
+      "id": "scene-0",
+      "type": "title",
+      "start": 0.0,
+      "end": 6.0,
+      "narration": "The axilla.",
+      "narrationWords": [{"w": "The", "start": 0.1, "end": 0.3}, {"w": "axilla.", "start": 0.4, "end": 0.9}],
+      "visuals": { "kind": "title-card", "text": "The Axilla", "codeRange": "AN10.1-13" }
+    },
+    {
+      "id": "scene-1",
+      "type": "image",
+      "start": 6.0,
+      "end": 20.0,
+      "narration": "A pyramid-shaped space.",
+      "narrationWords": [],
+      "visuals": { "kind": "image", "src": "https://cdn.cbme.in/x.png", "alt": "Axilla", "kenBurns": "in-center" },
+      "bloomTarget": "Understand",
+      "competencyTag": "AN10.1"
+    },
+    {
+      "id": "scene-2",
+      "type": "text",
+      "start": 20.0,
+      "end": 32.0,
+      "narration": "Three boundaries.",
+      "narrationWords": [],
+      "visuals": { "kind": "text-slide", "heading": "Boundaries", "bullets": ["Anterior wall", "Posterior wall", "Medial wall"] }
+    },
+    {
+      "id": "scene-3",
+      "type": "diagram",
+      "start": 32.0,
+      "end": 42.0,
+      "narration": "Brachial plexus.",
+      "narrationWords": [],
+      "visuals": { "kind": "diagram-html", "src": "https://cdn.cbme.in/x.html", "height": 600 }
+    },
+    {
+      "id": "scene-4",
+      "type": "quiz-recap",
+      "start": 42.0,
+      "end": 52.0,
+      "narration": "Quick check.",
+      "narrationWords": [],
+      "visuals": { "kind": "text-slide", "bullets": ["Upper trunk", "Middle trunk", "Lower trunk"] },
+      "interactionHint": {
+        "type": "MultiChoice",
+        "competency": "AN10.4",
+        "bloomLevel": "Remember",
+        "placement": "poster",
+        "pause": true,
+        "seekBackOnWrong": 30.0
+      }
+    },
+    {
+      "id": "scene-5",
+      "type": "end",
+      "start": 52.0,
+      "end": 60.0,
+      "narration": "Key takeaways.",
+      "narrationWords": [],
+      "visuals": { "kind": "end-card", "takeaways": ["Pyramid shape", "Brachial plexus runs through"], "competencies": ["AN10.1", "AN10.4"] }
+    }
+  ]
+}
