@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "test@0.0.0",
+  "theme": "default",
   "topic": {
     "slug": "axilla",
     "id": 42,
@@ -34,6 +35,19 @@
       "narration": "A pyramid-shaped space.",
       "narrationWords": [],
       "visuals": { "kind": "image", "src": "https://cdn.cbme.in/x.png", "alt": "Axilla", "kenBurns": "in-center" },
+      "visualIntent": {
+        "strategy": "whole-and-magnified",
+        "rationale": "Spatial context plus structural detail of the brachial plexus.",
+        "panels": [
+          { "role": "whole", "imagePrompt": "Full brachial plexus anatomy", "caption": "Full pathway" },
+          { "role": "magnified", "imagePrompt": "Upper trunk formation from C5-C6", "caption": "Upper trunk" }
+        ],
+        "textOverlay": {
+          "heading": "Brachial plexus",
+          "points": ["Upper trunk: C5-C6", "Middle trunk: C7", "Lower trunk: C8-T1"]
+        },
+        "resolvedImages": []
+      },
       "bloomTarget": "Understand",
       "competencyTag": "AN10.1"
     },

@@ -62,6 +62,72 @@ export const InteractionHint = z.object({
   seekBackOnWrong: z.number().nonnegative().optional(),
 });
 
+export const Panel = z.object({
+  role: z.string(),
+  imagePrompt: z.string(),
+  caption: z.string().optional(),
+});
+
+export const TextOverlay = z.object({
+  heading: z.string().optional(),
+  points: z.array(z.string()).max(5).optional(),
+  footnote: z.string().optional(),
+});
+
+export const ResolvedImage = z.object({
+  role: z.string(),
+  src: httpUrl,
+});
+
+const visualIntentBase = z.object({
+  rationale: z.string(),
+  textOverlay: TextOverlay.optional(),
+  resolvedImages: z.array(ResolvedImage).default([]),
+});
+
+export const VisualIntent = z.discriminatedUnion('strategy', [
+  visualIntentBase.extend({
+    strategy: z.literal('single-image'),
+    panels: z.array(Panel).length(1),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('compare-panels'),
+    panels: z.array(Panel).length(2),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('whole-and-magnified'),
+    panels: z.array(Panel).length(2),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('grid-4'),
+    panels: z.array(Panel).length(4),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('annotated'),
+    panels: z.array(Panel).length(1),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('timeline'),
+    panels: z.array(Panel).min(3).max(7),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('flowchart'),
+    panels: z.array(Panel).min(3).max(7),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('mechanism'),
+    panels: z.array(Panel).min(2).max(5),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('imaging-study'),
+    panels: z.array(Panel).min(2).max(3),
+  }),
+  visualIntentBase.extend({
+    strategy: z.literal('text-forward'),
+    panels: z.array(Panel).length(0).default([]),
+  }),
+]);
+
 export const Scene = z.object({
   id: z.string(),
   type: z.enum(['title', 'image', 'text', 'diagram', 'quiz-recap', 'end']),
@@ -69,15 +135,22 @@ export const Scene = z.object({
   end: z.number().nonnegative(),
   narration: z.string(),
   narrationWords: z.array(NarrationWord).default([]),
-  visuals: Visuals,
+  visuals: Visuals.optional(),
+  visualIntent: VisualIntent.optional(),
   bloomTarget: BloomLevel.optional(),
   competencyTag: z.string().optional(),
   interactionHint: InteractionHint.optional(),
-}).refine((s) => s.end > s.start, { message: 'scene end must be > start' });
+})
+  .refine((s) => s.end > s.start, { message: 'scene end must be > start' })
+  .refine(
+    (s) => s.visuals !== undefined || s.visualIntent !== undefined,
+    { message: 'scene must have either visuals or visualIntent' }
+  );
 
 export const VideoSpecSchema = z.object({
   schemaVersion: z.literal(1),
   source: z.string(),
+  theme: z.string().default('default'),
   topic: z.object({
     slug: z.string(),
     id: z.number().int().positive(),

@@ -76,4 +76,55 @@ describe('VideoSpecSchema', () => {
     const spec = parseVideoSpec(minimal);
     expect(spec.scenes[1].visuals.kenBurns).toBe('static');
   });
+
+  it('parses a scene with visualIntent (whole-and-magnified)', () => {
+    const spec = parseVideoSpec(fixture('full.json'));
+    const scene1 = spec.scenes.find((s) => s.id === 'scene-1');
+    expect(scene1.visualIntent).toBeDefined();
+    expect(scene1.visualIntent.strategy).toBe('whole-and-magnified');
+    expect(scene1.visualIntent.panels).toHaveLength(2);
+    expect(scene1.visualIntent.panels[0].role).toBe('whole');
+  });
+
+  it('rejects a grid-4 visualIntent with wrong panel count', () => {
+    const bad = fixture('minimal.json');
+    bad.scenes[0] = {
+      id: 'scene-x',
+      type: 'image',
+      start: 0,
+      end: 5,
+      narration: 'x',
+      narrationWords: [],
+      visualIntent: {
+        strategy: 'grid-4',
+        rationale: 'r',
+        panels: [
+          { role: 'a', imagePrompt: 'a' },
+          { role: 'b', imagePrompt: 'b' },
+        ],
+        resolvedImages: [],
+      },
+    };
+    const result = safeParseVideoSpec(bad);
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects a scene with neither visuals nor visualIntent', () => {
+    const bad = fixture('minimal.json');
+    delete bad.scenes[0].visuals;
+    const result = safeParseVideoSpec(bad);
+    expect(result.success).toBe(false);
+  });
+
+  it('applies theme default of "default" when omitted', () => {
+    const spec = parseVideoSpec(fixture('minimal.json'));
+    expect(spec.theme).toBe('default');
+  });
+
+  it('parses an explicit theme value', () => {
+    const withTheme = fixture('minimal.json');
+    withTheme.theme = 'medical-cool';
+    const spec = parseVideoSpec(withTheme);
+    expect(spec.theme).toBe('medical-cool');
+  });
 });
