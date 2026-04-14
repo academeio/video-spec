@@ -62,10 +62,24 @@ export const InteractionHint = z.object({
   seekBackOnWrong: z.number().nonnegative().optional(),
 });
 
+/**
+ * A Panel represents one "visual beat" — a single composed image shown
+ * for a slice of the scene's duration. A scene with one Panel is a
+ * classic single-image scene. A scene with multiple Panels plays them
+ * as a sequential slideshow (with crossfade transitions), each Panel
+ * anchored to a real narration word range (startSec/endSec) decided
+ * after TTS by the visual planner.
+ *
+ * startSec/endSec are scene-relative seconds. If either is absent the
+ * renderer falls back to an equal split of the scene duration across
+ * all panels.
+ */
 export const Panel = z.object({
   role: z.string(),
   imagePrompt: z.string(),
   caption: z.string().optional(),
+  startSec: z.number().nonnegative().optional(),
+  endSec: z.number().nonnegative().optional(),
 });
 
 export const TextOverlay = z.object({
@@ -88,7 +102,10 @@ const visualIntentBase = z.object({
 export const VisualIntent = z.discriminatedUnion('strategy', [
   visualIntentBase.extend({
     strategy: z.literal('single-image'),
-    panels: z.array(Panel).length(1),
+    // 1 = classic single-image scene. 2–5 = sequential beats (slideshow
+    // with crossfade transitions). The planner decides based on how
+    // many distinct concepts the narration covers.
+    panels: z.array(Panel).min(1).max(5),
   }),
   visualIntentBase.extend({
     strategy: z.literal('compare-panels'),
@@ -104,7 +121,9 @@ export const VisualIntent = z.discriminatedUnion('strategy', [
   }),
   visualIntentBase.extend({
     strategy: z.literal('annotated'),
-    panels: z.array(Panel).length(1),
+    // Same beat semantics as single-image (1–5 sequential beats), plus
+    // a required textOverlay.points label list displayed alongside.
+    panels: z.array(Panel).min(1).max(5),
   }),
   visualIntentBase.extend({
     strategy: z.literal('timeline'),
