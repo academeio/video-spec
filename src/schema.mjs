@@ -93,6 +93,127 @@ export const ResolvedImage = z.object({
   src: httpUrl,
 });
 
+/**
+ * BoardSpec: a whiteboard-style figure drawn step by step in time with the
+ * narration (the `board-reveal` strategy). Every coordinate is in data units
+ * of its panel except `box` and `text.at`, which are 1920×1080 canvas pixels.
+ * `claims` are numeric statements a checker verifies on the drawn curves
+ * before render (see academe-video-gen src/board/check-spec.mjs).
+ * Proven in the video-tools-lab Remotion board-reveal trial (11-10-2026).
+ */
+const BoardColor = z.enum(['ink', 'accent', 'blue', 'green', 'muted']);
+const XY = z.tuple([z.number(), z.number()]);
+const BoardAxis = z.object({
+  min: z.number(),
+  max: z.number(),
+  ticks: z.array(z.number()).default([]),
+  label: z.string().optional(),
+}).refine((a) => a.max > a.min, { message: 'axis max must be > min' });
+
+export const BoardPanel = z.object({
+  id: z.string(),
+  box: z.tuple([z.number(), z.number(), z.number().positive(), z.number().positive()]),
+  x: BoardAxis,
+  y: BoardAxis,
+  y2: BoardAxis.optional(),
+  hideY: z.boolean().optional(),
+});
+
+const layerBase = { id: z.string(), step: z.number().int().positive(), color: BoardColor.default('ink') };
+const onPanel = { panel: z.string(), axis: z.enum(['y', 'y2']).default('y') };
+
+export const BoardLayer = z.discriminatedUnion('kind', [
+  z.object({
+    ...layerBase, ...onPanel,
+    kind: z.literal('curve'),
+    points: z.array(XY).min(2),
+    width: z.number().positive().optional(),
+  }),
+  z.object({
+    ...layerBase, ...onPanel,
+    kind: z.literal('label'),
+    at: XY,
+    text: z.string(),
+    anchor: z.enum(['start', 'middle', 'end']).default('start'),
+    size: z.number().positive().optional(),
+  }),
+  z.object({ ...layerBase, ...onPanel, kind: z.literal('arrow'), from: XY, to: XY }),
+  z.object({
+    ...layerBase,
+    kind: z.literal('bar'),
+    panel: z.string(),
+    x0: z.number(),
+    x1: z.number(),
+    row: z.number().int().positive().default(1),
+    hatch: z.boolean().default(false),
+    text: z.string().optional(),
+  }),
+  z.object({
+    ...layerBase,
+    kind: z.literal('text'),
+    at: XY,
+    text: z.string(),
+    anchor: z.enum(['start', 'middle', 'end']).default('start'),
+    size: z.number().positive().optional(),
+  }),
+  z.object({
+    ...layerBase,
+    kind: z.literal('vline'),
+    x: z.number(),
+    panels: z.array(z.string()).min(1),
+    text: z.string().optional(),
+  }),
+]);
+
+export const BoardStep = z.object({
+  n: z.number().int().positive(),
+  summary: z.string().optional(),
+  narrationAnchor: z.string().min(1),
+});
+
+export const BoardClaim = z.object({
+  check: z.enum(['min', 'max', 'valueAt', 'argmax', 'crossing']),
+  layers: z.array(z.string()).optional(),
+  a: z.array(z.string()).optional(),
+  b: z.array(z.string()).optional(),
+  x: z.number().optional(),
+  xRange: z.tuple([z.number(), z.number()]).optional(),
+  expect: z.number(),
+  tol: z.number().nonnegative(),
+  source: z.string().optional(),
+}).refine(
+  (c) => (c.check === 'crossing' ? c.a?.length && c.b?.length : c.layers?.length),
+  { message: 'crossing claims need a and b; other claims need layers' },
+).refine((c) => c.check !== 'valueAt' || c.x !== undefined, { message: 'valueAt claims need x' });
+
+export const BoardSpec = z.object({
+  title: z.string().optional(),
+  panels: z.array(BoardPanel).min(1),
+  layers: z.array(BoardLayer).min(1),
+  steps: z.array(BoardStep).min(1),
+  claims: z.array(BoardClaim).default([]),
+}).superRefine((b, ctx) => {
+  const panels = new Set(b.panels.map((p) => p.id));
+  const steps = new Set(b.steps.map((s) => s.n));
+  const ids = new Set();
+  for (const l of b.layers) {
+    if (ids.has(l.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate layer id ${l.id}` });
+    ids.add(l.id);
+    if (l.kind === 'curve' && !l.points.every((p, i) => i === 0 || p[0] > l.points[i - 1][0])) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `curve ${l.id}: points must have strictly increasing x` });
+    }
+    if (!steps.has(l.step)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `layer ${l.id}: step ${l.step} is not in steps` });
+    for (const p of l.kind === 'vline' ? l.panels : l.panel ? [l.panel] : []) {
+      if (!panels.has(p)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `layer ${l.id}: unknown panel ${p}` });
+    }
+  }
+  for (const c of b.claims) {
+    for (const id of [...(c.layers ?? []), ...(c.a ?? []), ...(c.b ?? [])]) {
+      if (!ids.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `claim refers to unknown layer ${id}` });
+    }
+  }
+});
+
 const visualIntentBase = z.object({
   rationale: z.string(),
   textOverlay: TextOverlay.optional(),
@@ -144,6 +265,13 @@ export const VisualIntent = z.discriminatedUnion('strategy', [
   visualIntentBase.extend({
     strategy: z.literal('text-forward'),
     panels: z.array(Panel).length(0).default([]),
+  }),
+  visualIntentBase.extend({
+    // A figure drawn from data, step by step, as the narration reaches each
+    // step's anchor phrase. No images: panels stay empty.
+    strategy: z.literal('board-reveal'),
+    panels: z.array(Panel).length(0).default([]),
+    board: BoardSpec,
   }),
 ]);
 
