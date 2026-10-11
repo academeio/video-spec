@@ -1,0 +1,1343 @@
+{
+  "title": "Five phases, one ion story",
+  "panels": [
+    {
+      "id": "cardiac",
+      "box": [
+        40,
+        150,
+        1220,
+        800
+      ],
+      "x": {
+        "min": 0,
+        "max": 400,
+        "ticks": [
+          0,
+          100,
+          200,
+          300,
+          400
+        ],
+        "label": "Time (ms)"
+      },
+      "y": {
+        "min": -110,
+        "max": 40,
+        "ticks": [
+          -90,
+          0,
+          20
+        ],
+        "label": "Membrane potential (mV)"
+      },
+      "y2": {
+        "min": -10,
+        "max": 200,
+        "ticks": [
+          0,
+          100
+        ],
+        "label": "Tension (%)"
+      }
+    },
+    {
+      "id": "skeletal",
+      "box": [
+        1290,
+        150,
+        600,
+        800
+      ],
+      "x": {
+        "min": 0,
+        "max": 400,
+        "ticks": [
+          0,
+          100,
+          200,
+          300,
+          400
+        ],
+        "label": "Time (ms)"
+      },
+      "y": {
+        "min": -110,
+        "max": 40,
+        "ticks": [
+          -90,
+          0
+        ],
+        "label": "Membrane potential (mV)"
+      },
+      "y2": {
+        "min": -10,
+        "max": 130,
+        "ticks": [
+          0,
+          100
+        ],
+        "label": "Tension (%)"
+      }
+    }
+  ],
+  "layers": [
+    {
+      "id": "ap-ph4",
+      "step": 2,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          0,
+          -90
+        ],
+        [
+          4,
+          -90
+        ],
+        [
+          8,
+          -90
+        ],
+        [
+          12,
+          -90
+        ],
+        [
+          16,
+          -90
+        ],
+        [
+          20,
+          -90
+        ]
+      ]
+    },
+    {
+      "id": "lbl-ph4",
+      "step": 2,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        100,
+        -100
+      ],
+      "text": "4: K+ channels open (IK1)",
+      "anchor": "start",
+      "color": "ink"
+    },
+    {
+      "id": "ap-ph0",
+      "step": 3,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          20,
+          -90
+        ],
+        [
+          20.4,
+          -60
+        ],
+        [
+          20.8,
+          -30
+        ],
+        [
+          21.2,
+          0
+        ],
+        [
+          21.6,
+          15
+        ],
+        [
+          22,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "lbl-ph0",
+      "step": 3,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        30,
+        31
+      ],
+      "text": "0: fast Na+ in",
+      "anchor": "start",
+      "color": "ink"
+    },
+    {
+      "id": "ap-ph1",
+      "step": 4,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          22,
+          20
+        ],
+        [
+          22.5,
+          17
+        ],
+        [
+          23,
+          13
+        ],
+        [
+          23.5,
+          9
+        ],
+        [
+          24.2,
+          5.5
+        ],
+        [
+          25,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "lbl-ph1",
+      "step": 4,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        30,
+        19.5
+      ],
+      "text": "1: transient K+ out",
+      "anchor": "start",
+      "color": "ink"
+    },
+    {
+      "id": "ap-ph2",
+      "step": 5,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          25,
+          3
+        ],
+        [
+          60,
+          2.6
+        ],
+        [
+          100,
+          2.1
+        ],
+        [
+          140,
+          1.6
+        ],
+        [
+          180,
+          1
+        ],
+        [
+          200,
+          0.6
+        ],
+        [
+          220,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "ca-in",
+      "step": 5,
+      "kind": "arrow",
+      "panel": "cardiac",
+      "axis": "y",
+      "from": [
+        175,
+        26
+      ],
+      "to": [
+        175,
+        6
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lbl-ca-in",
+      "step": 5,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        180,
+        22
+      ],
+      "text": "Ca2+ in (L-type)",
+      "anchor": "start",
+      "color": "green"
+    },
+    {
+      "id": "k-out",
+      "step": 5,
+      "kind": "arrow",
+      "panel": "cardiac",
+      "axis": "y",
+      "from": [
+        175,
+        -25
+      ],
+      "to": [
+        175,
+        -5
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lbl-k-out",
+      "step": 5,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        180,
+        -15
+      ],
+      "text": "K+ out",
+      "anchor": "start",
+      "color": "blue"
+    },
+    {
+      "id": "lbl-balance",
+      "step": 5,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        168,
+        -15
+      ],
+      "text": "balance",
+      "anchor": "end",
+      "color": "ink"
+    },
+    {
+      "id": "ap-ph3",
+      "step": 6,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          220,
+          0
+        ],
+        [
+          235,
+          -6
+        ],
+        [
+          250,
+          -18
+        ],
+        [
+          262,
+          -35
+        ],
+        [
+          274,
+          -58
+        ],
+        [
+          284,
+          -75
+        ],
+        [
+          292,
+          -85
+        ],
+        [
+          300,
+          -90
+        ]
+      ]
+    },
+    {
+      "id": "ap-ph4b",
+      "step": 6,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          300,
+          -90
+        ],
+        [
+          320,
+          -90
+        ],
+        [
+          340,
+          -90
+        ],
+        [
+          360,
+          -90
+        ],
+        [
+          380,
+          -90
+        ],
+        [
+          400,
+          -90
+        ]
+      ]
+    },
+    {
+      "id": "lbl-ph3",
+      "step": 6,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y",
+      "at": [
+        292,
+        -40
+      ],
+      "text": "3: K+ out",
+      "anchor": "start",
+      "color": "ink"
+    },
+    {
+      "id": "tension",
+      "step": 7,
+      "kind": "curve",
+      "panel": "cardiac",
+      "axis": "y2",
+      "color": "accent",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          40,
+          0
+        ],
+        [
+          60,
+          6
+        ],
+        [
+          80,
+          20
+        ],
+        [
+          100,
+          40
+        ],
+        [
+          120,
+          61
+        ],
+        [
+          140,
+          80
+        ],
+        [
+          160,
+          93
+        ],
+        [
+          180,
+          99
+        ],
+        [
+          190,
+          100
+        ],
+        [
+          200,
+          99
+        ],
+        [
+          220,
+          93
+        ],
+        [
+          240,
+          80
+        ],
+        [
+          260,
+          60
+        ],
+        [
+          280,
+          38
+        ],
+        [
+          300,
+          18
+        ],
+        [
+          320,
+          6
+        ],
+        [
+          335,
+          0
+        ],
+        [
+          350,
+          0
+        ],
+        [
+          400,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "lbl-twitch",
+      "step": 7,
+      "kind": "label",
+      "panel": "cardiac",
+      "axis": "y2",
+      "at": [
+        160,
+        70
+      ],
+      "text": "twitch",
+      "anchor": "start",
+      "color": "accent"
+    },
+    {
+      "id": "arp",
+      "step": 8,
+      "kind": "bar",
+      "panel": "cardiac",
+      "x0": 20,
+      "x1": 250,
+      "row": 1,
+      "hatch": false,
+      "text": "ARP",
+      "color": "ink"
+    },
+    {
+      "id": "rrp",
+      "step": 8,
+      "kind": "bar",
+      "panel": "cardiac",
+      "x0": 250,
+      "x1": 300,
+      "row": 1,
+      "hatch": true,
+      "text": "RRP",
+      "color": "ink"
+    },
+    {
+      "id": "sk-ap",
+      "step": 9,
+      "kind": "curve",
+      "panel": "skeletal",
+      "axis": "y",
+      "color": "ink",
+      "points": [
+        [
+          0,
+          -90
+        ],
+        [
+          5,
+          -90
+        ],
+        [
+          10,
+          -90
+        ],
+        [
+          10.5,
+          -20
+        ],
+        [
+          11,
+          30
+        ],
+        [
+          11.5,
+          -30
+        ],
+        [
+          12,
+          -90
+        ],
+        [
+          16,
+          -90
+        ],
+        [
+          20,
+          -90
+        ]
+      ]
+    },
+    {
+      "id": "lbl-sk-ap",
+      "step": 9,
+      "kind": "label",
+      "panel": "skeletal",
+      "axis": "y",
+      "at": [
+        22,
+        10
+      ],
+      "text": "AP ~2 ms",
+      "anchor": "start",
+      "color": "ink"
+    },
+    {
+      "id": "sk-twitch",
+      "step": 9,
+      "kind": "curve",
+      "panel": "skeletal",
+      "axis": "y2",
+      "color": "accent",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          25,
+          15
+        ],
+        [
+          35,
+          25
+        ],
+        [
+          45,
+          30
+        ],
+        [
+          55,
+          27
+        ],
+        [
+          70,
+          17
+        ],
+        [
+          85,
+          7
+        ],
+        [
+          100,
+          2
+        ],
+        [
+          110,
+          0
+        ],
+        [
+          130,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "lbl-sk-twitch",
+      "step": 9,
+      "kind": "label",
+      "panel": "skeletal",
+      "axis": "y2",
+      "at": [
+        20,
+        50
+      ],
+      "text": "twitch",
+      "anchor": "start",
+      "color": "accent"
+    },
+    {
+      "id": "stim-1",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        150,
+        36
+      ],
+      "to": [
+        150,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-2",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        180,
+        36
+      ],
+      "to": [
+        180,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-3",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        210,
+        36
+      ],
+      "to": [
+        210,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-4",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        240,
+        36
+      ],
+      "to": [
+        240,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-5",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        270,
+        36
+      ],
+      "to": [
+        270,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-6",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        300,
+        36
+      ],
+      "to": [
+        300,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-7",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        330,
+        36
+      ],
+      "to": [
+        330,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-8",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        360,
+        36
+      ],
+      "to": [
+        360,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "stim-9",
+      "step": 9,
+      "kind": "arrow",
+      "panel": "skeletal",
+      "axis": "y",
+      "from": [
+        390,
+        36
+      ],
+      "to": [
+        390,
+        22
+      ],
+      "color": "ink"
+    },
+    {
+      "id": "lbl-stimuli",
+      "step": 9,
+      "kind": "label",
+      "panel": "skeletal",
+      "axis": "y",
+      "at": [
+        136,
+        30
+      ],
+      "text": "stimuli",
+      "anchor": "end",
+      "color": "ink"
+    },
+    {
+      "id": "sk-train",
+      "step": 9,
+      "kind": "curve",
+      "panel": "skeletal",
+      "axis": "y2",
+      "color": "accent",
+      "points": [
+        [
+          130,
+          0
+        ],
+        [
+          150,
+          0
+        ],
+        [
+          175,
+          28
+        ],
+        [
+          183,
+          27
+        ],
+        [
+          205,
+          52
+        ],
+        [
+          213,
+          51
+        ],
+        [
+          235,
+          72
+        ],
+        [
+          243,
+          71
+        ],
+        [
+          265,
+          86
+        ],
+        [
+          273,
+          85.5
+        ],
+        [
+          295,
+          95
+        ],
+        [
+          303,
+          94.8
+        ],
+        [
+          325,
+          99
+        ],
+        [
+          345,
+          100
+        ],
+        [
+          370,
+          100
+        ],
+        [
+          400,
+          100
+        ]
+      ]
+    },
+    {
+      "id": "lbl-summation",
+      "step": 9,
+      "kind": "label",
+      "panel": "skeletal",
+      "axis": "y2",
+      "at": [
+        235,
+        30
+      ],
+      "text": "summation",
+      "anchor": "start",
+      "color": "accent"
+    },
+    {
+      "id": "lbl-tetanus",
+      "step": 9,
+      "kind": "label",
+      "panel": "skeletal",
+      "axis": "y2",
+      "at": [
+        396,
+        70
+      ],
+      "text": "tetanus",
+      "anchor": "end",
+      "color": "accent"
+    },
+    {
+      "id": "caption",
+      "step": 10,
+      "kind": "text",
+      "at": [
+        960,
+        1020
+      ],
+      "text": "Cardiac ARP ≈ contraction → no summation → no tetanus → relax and refill",
+      "anchor": "middle",
+      "size": 34,
+      "color": "ink"
+    }
+  ],
+  "steps": [
+    {
+      "n": 1,
+      "summary": "axes: membrane potential (−90, 0, +20 mV) vs time 0–400 ms",
+      "narrationAnchor": "The vertical axis is membrane potential"
+    },
+    {
+      "n": 2,
+      "summary": "phase 4 flat at −90 mV to 20 ms",
+      "narrationAnchor": "A ventricular cell at rest sits at about minus ninety"
+    },
+    {
+      "n": 3,
+      "summary": "phase 0 upstroke −90 → +20 mV at 20 ms",
+      "narrationAnchor": "Fast sodium channels open, sodium rushes in"
+    },
+    {
+      "n": 4,
+      "summary": "phase 1 notch to ~+3 mV",
+      "narrationAnchor": "Phase 1 is this small notch"
+    },
+    {
+      "n": 5,
+      "summary": "phase 2 plateau ~0 mV 25–220 ms; Ca2+ in / K+ out arrows, balance",
+      "narrationAnchor": "Phase 2, the plateau. For about two hundred milliseconds"
+    },
+    {
+      "n": 6,
+      "summary": "phase 3 repolarisation 220–300 ms to −90 mV; phase 4 to 400 ms",
+      "narrationAnchor": "Phase 3: the calcium channels close, potassium wins"
+    },
+    {
+      "n": 7,
+      "summary": "tension curve in accent: rise 40 ms, peak 190 ms, baseline by 335 ms",
+      "narrationAnchor": "Now, in a second colour, the tension curve"
+    },
+    {
+      "n": 8,
+      "summary": "ARP bar 20–250 ms, hatched RRP bar 250–300 ms",
+      "narrationAnchor": "Under the axis I shade the absolute refractory period"
+    },
+    {
+      "n": 9,
+      "summary": "skeletal panel: 2 ms AP, 100 ms twitch, 30 ms stimulus train → summation → tetanus",
+      "narrationAnchor": "Now skeletal muscle, on the right"
+    },
+    {
+      "n": 10,
+      "summary": "caption: cardiac ARP ≈ contraction → no tetanus",
+      "narrationAnchor": "In the heart, by the time the cell"
+    }
+  ],
+  "claims": [
+    {
+      "layers": [
+        "ap-ph4",
+        "ap-ph0",
+        "ap-ph1",
+        "ap-ph2",
+        "ap-ph3",
+        "ap-ph4b"
+      ],
+      "check": "min",
+      "expect": -90,
+      "tol": 0.5,
+      "source": "hard constraint 1: never below −90 mV"
+    },
+    {
+      "layers": [
+        "ap-ph4"
+      ],
+      "check": "valueAt",
+      "x": 10,
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 2: phase 4 at −90 mV"
+    },
+    {
+      "layers": [
+        "ap-ph4"
+      ],
+      "check": "max",
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 2: phase 4 flat"
+    },
+    {
+      "layers": [
+        "ap-ph0",
+        "ap-ph1",
+        "ap-ph2"
+      ],
+      "check": "max",
+      "expect": 20,
+      "tol": 1,
+      "source": "board step 3: upstroke to +20 mV"
+    },
+    {
+      "layers": [
+        "ap-ph4",
+        "ap-ph0",
+        "ap-ph1",
+        "ap-ph2",
+        "ap-ph3",
+        "ap-ph4b"
+      ],
+      "check": "argmax",
+      "expect": 21,
+      "tol": 2,
+      "source": "board step 3: upstroke at ~20 ms"
+    },
+    {
+      "layers": [
+        "ap-ph1"
+      ],
+      "check": "min",
+      "expect": 2.5,
+      "tol": 2.5,
+      "source": "board step 4: notch to ~0 to +5 mV"
+    },
+    {
+      "layers": [
+        "ap-ph2"
+      ],
+      "check": "max",
+      "xRange": [
+        25,
+        220
+      ],
+      "expect": 2.5,
+      "tol": 2.5,
+      "source": "hard constraint 2: plateau ≤ +5 mV, no bump"
+    },
+    {
+      "layers": [
+        "ap-ph2"
+      ],
+      "check": "min",
+      "xRange": [
+        25,
+        220
+      ],
+      "expect": 2.5,
+      "tol": 2.5,
+      "source": "hard constraint 2: plateau ≥ 0 mV"
+    },
+    {
+      "layers": [
+        "ap-ph2"
+      ],
+      "check": "valueAt",
+      "x": 25,
+      "expect": 2.5,
+      "tol": 2.5,
+      "source": "board step 5: plateau starts ~25 ms"
+    },
+    {
+      "layers": [
+        "ap-ph2"
+      ],
+      "check": "valueAt",
+      "x": 200,
+      "expect": 2.5,
+      "tol": 2.5,
+      "source": "hard constraint 2: plateau still 0 to +5 mV at ~200 ms"
+    },
+    {
+      "layers": [
+        "ap-ph3"
+      ],
+      "check": "valueAt",
+      "x": 220,
+      "expect": 0,
+      "tol": 2.5,
+      "source": "board step 5/6: plateau ends, phase 3 begins ~220 ms"
+    },
+    {
+      "layers": [
+        "ap-ph3"
+      ],
+      "check": "valueAt",
+      "x": 300,
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 6 / hard constraint 1: back at −90 mV by ~300 ms"
+    },
+    {
+      "layers": [
+        "ap-ph3"
+      ],
+      "check": "min",
+      "expect": -90,
+      "tol": 0.5,
+      "source": "hard constraint 1: no undershoot in phase 3"
+    },
+    {
+      "layers": [
+        "ap-ph4b"
+      ],
+      "check": "min",
+      "xRange": [
+        300,
+        400
+      ],
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 6: phase 4 continues flat to 400 ms"
+    },
+    {
+      "layers": [
+        "ap-ph4b"
+      ],
+      "check": "max",
+      "xRange": [
+        300,
+        400
+      ],
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 6: phase 4 continues flat to 400 ms"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "min",
+      "expect": 0,
+      "tol": 0.5,
+      "source": "hard constraint 3: tension never negative"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "max",
+      "xRange": [
+        0,
+        40
+      ],
+      "expect": 0,
+      "tol": 0.5,
+      "source": "board step 7: tension starts rising at ~40 ms"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "valueAt",
+      "x": 40,
+      "expect": 0,
+      "tol": 1,
+      "source": "board step 7: twitch start ~40 ms"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "max",
+      "expect": 100,
+      "tol": 2,
+      "source": "hard constraint 3: peak ~100 %"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "argmax",
+      "expect": 190,
+      "tol": 10,
+      "source": "board step 7: peak at ~180–200 ms"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "valueAt",
+      "x": 335,
+      "expect": 0,
+      "tol": 1,
+      "source": "board step 7: back to baseline at ~320–350 ms"
+    },
+    {
+      "layers": [
+        "tension"
+      ],
+      "check": "max",
+      "xRange": [
+        350,
+        400
+      ],
+      "expect": 0,
+      "tol": 0.5,
+      "source": "hard constraint 3: 0 % by ~350 ms and stays 0"
+    },
+    {
+      "layers": [
+        "sk-ap"
+      ],
+      "check": "min",
+      "expect": -90,
+      "tol": 0.5,
+      "source": "skeletal AP rests at −90 mV, no undershoot"
+    },
+    {
+      "layers": [
+        "sk-ap"
+      ],
+      "check": "valueAt",
+      "x": 10,
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 9: AP spike ~2 ms wide (start)"
+    },
+    {
+      "layers": [
+        "sk-ap"
+      ],
+      "check": "valueAt",
+      "x": 12,
+      "expect": -90,
+      "tol": 0.5,
+      "source": "board step 9: AP spike ~2 ms wide (end)"
+    },
+    {
+      "layers": [
+        "sk-ap"
+      ],
+      "check": "argmax",
+      "expect": 11,
+      "tol": 1,
+      "source": "board step 9: spike centred within the 2 ms window"
+    },
+    {
+      "layers": [
+        "sk-twitch"
+      ],
+      "check": "min",
+      "expect": 0,
+      "tol": 0.5,
+      "source": "tension never negative"
+    },
+    {
+      "layers": [
+        "sk-twitch"
+      ],
+      "check": "valueAt",
+      "x": 110,
+      "expect": 0,
+      "tol": 1,
+      "source": "board step 9: twitch lasts ~100 ms (10–110 ms)"
+    },
+    {
+      "layers": [
+        "sk-train"
+      ],
+      "check": "min",
+      "expect": 0,
+      "tol": 0.5,
+      "source": "tension never negative"
+    },
+    {
+      "layers": [
+        "sk-train"
+      ],
+      "check": "min",
+      "xRange": [
+        345,
+        400
+      ],
+      "expect": 100,
+      "tol": 1,
+      "source": "board step 9: twitches fuse into a tetanic plateau"
+    }
+  ]
+}

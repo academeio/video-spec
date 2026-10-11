@@ -1,6 +1,6 @@
 {
   "name": "@academeio/video-spec",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Zod schema for the academe-video-gen video-spec.json contract",
   "type": "module",
   "main": "./src/index.mjs",
